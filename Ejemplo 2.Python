@@ -1,0 +1,48 @@
+import matplotlib.pyplot as plt 
+import pandas as pd 
+import numpy as np 
+
+df = pd.read_csv("D:/BEDU DATA SCIENCES/Python/powerplants.csv", sep = ",")
+
+df
+##Análisis exploratorio de datos
+
+df.head(5)
+
+df.shape
+
+df.columns
+
+df.dtypes
+
+df.max()
+
+##El data set consiste en 16 columnas de 34936 filas
+##Las columnas son: "'country code', 'country', 'name of powerplant', 'capacity in MW',
+       'latitude', 'longitude', 'primary_fuel', 'secondary fuel',
+       'other_fuel 1', 'other_fuel 2', 'start date', 'owner of plant',
+       'geolocation_source', 'generation_gwh_2020', 'generation_data_source',
+       'estimated_generation_gwh_2020'
+###Hay diversos datos numéricos y también objetos, los datos que nos interesan son el país, la capacidad en MW y el primary_fuel.
+###El resto de datos no son reelevantes para este análisis.
+
+## La capacidad en MW menor es de 1 y la mayor es de 22500
+
+###Limpieza de datos
+
+##Se eliminarán los valores nan.
+
+df.dropna(axis =1)
+
+df_dropped = df.dropna(axis=1, how= 'any')
+df_dropped
+
+##Se renombrarán los nombres de las columnas
+column_name_mapping = {
+    'country code' : 'country_code',
+    'name of powerplant' : 'name_of_powerplant',
+    'capacity in MW' : 'capacity_in_MW',
+
+}
+
+df_renamed = df_dropped.rename(columns=column_name_mapping)
