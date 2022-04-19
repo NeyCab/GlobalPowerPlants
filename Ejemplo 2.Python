@@ -46,3 +46,36 @@ column_name_mapping = {
 }
 
 df_renamed = df_dropped.rename(columns=column_name_mapping)
+
+
+#Guardar dataset en CSV para trabajar en otra ocasión
+df_renamed.to_csv("D:/BEDU DATA SCIENCES/Python/powerplants2.csv")
+
+df = pd.read_csv("D:/BEDU DATA SCIENCES/Python/powerplants2.csv", index_col=0)
+
+df
+
+###Filtrando datos 
+df[df["country"].str.startswith("Mex")]
+
+##En México hay 277 plantas 
+
+df[df["country"].str.startswith("Mex")].sort_values("capacity_in_MW", ascending=False).head()
+
+###La planta que más energía produce es la de "Plutarco Elìas Calles (Petacalco)"", con capacidad de 2778.4 MW de Coal (carbón).
+###Después la Hidroeléctrica "Manuel Moreno Torres (Chicoasén)"" con capacidad de 2400 MW.
+
+
+#Regresando al DF original mundial se realizarán agrupaciones
+
+country =pd.DataFrame(df, columns=["country_code", "country"])
+
+country
+
+powerplant_ubication = pd.DataFrame(df, columns= ["name_of_powerplant", "latitude", "longitude"])
+
+powerplant_ubication
+
+fuel_capacity = pd.DataFrame(df, columns = ["capacity_in_MW", "primary_fuel"])
+
+fuel_capacity
