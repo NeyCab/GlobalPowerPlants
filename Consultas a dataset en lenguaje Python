@@ -79,3 +79,33 @@ powerplant_ubication
 fuel_capacity = pd.DataFrame(df, columns = ["capacity_in_MW", "primary_fuel"])
 
 fuel_capacity
+
+###Se realizaron agrupaciones con pivot_table 
+###Para saber el promedio de capacidad en MW por País
+
+df.pivot_table(index='country',values='capacity_in_MW',aggfunc=np.mean)
+
+
+###Nùmero de plantas de cada tipo de combustible por país
+
+df['count_fuel']=1
+
+df.pivot_table(index=['country','primary_fuel'],values='count_fuel',aggfunc=np.sum,)
+
+
+###Para saber el promedio de capacidad en MW por tipo de combustible
+
+df.pivot_table(index='primary_fuel', values='capacity_in_MW', aggfunc=np.mean)
+
+
+###Datos para México
+
+df2= df.loc[df.country=='Mexico']
+
+df2
+
+df2['count_fuel']=1
+
+df2.pivot_table(index=['country','primary_fuel'],values='count_fuel',aggfunc=np.sum,)
+
+df2.pivot_table(index=['country','primary_fuel'], values='capacity_in_MW', aggfunc=np.mean)
